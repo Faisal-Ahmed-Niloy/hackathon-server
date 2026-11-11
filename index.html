@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>NEXUS.IOT | Hackathon Telemetry</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app" id="iotdash">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">⌁</div>
+        <div><div class="brand-name">IronBeast<span>.IoT</span></div><div class="eyebrow">HACKATHON TELEMETRY PLATFORM</div></div>
+      </div>
+      <div class="top-actions">
+        <span class="status-pill"><i class="status-dot"></i>System Online</span>
+        <span class="status-pill clock" id="clock">--:--:--</span>
+        <button class="button" id="pause">Ⅱ Pause stream</button>
+      </div>
+    </header>
+
+    <section class="heading-row">
+      <div><h1>Command Center</h1><p class="muted">Monitor your IoT ecosystem in real time.</p></div>
+      <nav class="tabs" aria-label="Dashboard sections">
+        <button class="tab active" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="devices">Devices</button>
+        <button class="tab" data-tab="alerts">Alerts</button>
+      </nav>
+    </section>
+
+    <section id="overview" class="page-section">
+      <div class="metrics-grid">
+        <article class="panel metric-card"><p class="muted">Total Devices</p><div class="metric">08</div><p class="metric-foot positive">● 7 active · 1 offline</p></article>
+        <article class="panel metric-card"><p class="muted">Data Packets</p><div class="metric" id="packets">12,480</div><p class="metric-foot">↑ Incoming telemetry</p></article>
+        <article class="panel metric-card"><p class="muted">Avg. Temperature</p><div class="metric" id="avgtemp">27.4 <small>°C</small></div><p class="metric-foot">Across active sensors</p></article>
+        <article class="panel metric-card"><p class="muted">Network Latency</p><div class="metric" id="latency">42 <small>ms</small></div><p class="metric-foot positive">● Stable connection</p></article>
+      </div>
+
+      <div class="main-grid">
+        <article class="panel chart-panel">
+          <div class="panel-heading">
+            <div><h2>Telemetry Analytics</h2><p class="muted">Live sensor readings · Demo stream</p></div>
+            <select id="metric" class="select-control" aria-label="Select telemetry metric">
+              <option value="temp">Temperature (°C)</option>
+              <option value="humidity">Humidity (%)</option>
+              <option value="pressure">Pressure (hPa)</option>
+            </select>
+          </div>
+          <div class="chart-wrap"><canvas id="chart" aria-label="Telemetry line chart"></canvas></div>
+          <div class="chart-legend"><span><i class="legend-dot"></i><span id="legend">Temperature</span></span><span>Last 30 readings</span></div>
+        </article>
+
+        <article class="panel health-panel">
+          <h2>Device Health</h2><p class="muted">Current network status</p>
+          <div class="health-item"><div><span>Online devices</span><b>7 / 8</b></div><div class="progress"><span style="width:87.5%"></span></div></div>
+          <div class="health-item"><div><span>Network uptime</span><b>98.6%</b></div><div class="progress blue"><span style="width:98.6%"></span></div></div>
+          <div class="health-item"><div><span>Packet delivery</span><b>96.8%</b></div><div class="progress purple"><span style="width:96.8%"></span></div></div>
+          <div class="rate-block"><p class="muted">Data transmission rate</p><div class="rate" id="rate">24.8 <small>pkt/s</small></div></div>
+        </article>
+      </div>
+
+      <div class="lower-grid">
+        <article class="panel">
+          <div class="panel-heading"><h2>Connected Devices</h2><button class="text-button" data-goto="devices">View all →</button></div>
+          <div id="devicepreview"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><h2>Recent Alerts</h2><button class="text-button" data-goto="alerts">View all →</button></div>
+          <div id="alertpreview"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="devices" class="page-section" hidden>
+      <div class="section-intro"><div><h2>Device Registry</h2><p class="muted">All connected and registered IoT nodes</p></div><span class="status-pill">8 registered devices</span></div>
+      <article class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>DEVICE</th><th>TYPE</th><th>TEMPERATURE</th><th>HUMIDITY</th><th>STATUS</th></tr></thead><tbody id="devicetable"></tbody></table></div></article>
+    </section>
+
+    <section id="alerts" class="page-section" hidden>
+      <div class="section-intro"><div><h2>Alert Center</h2><p class="muted">System events and notifications</p></div></div>
+      <article class="panel" id="allalerts"></article>
+    </section>
+
+    <footer><span>© IronBeast IoT · Hackathon Dummy Interface</span><span><i class="status-dot"></i>Demo data simulation active</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
